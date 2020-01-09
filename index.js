@@ -1,10 +1,19 @@
 const express = require('express');
+const mongoose = require('mongoose');
+const keys = require('./config/keys');
+require('./models/User');
+require('./services/passport');
+
+mongoose.connect(keys.mongoURI);
+// mongoose
+//   .connect(keys.mongoURI, () => {}, { useNewUrlParser: true })
+//   .catch(err => {
+//     // console.log(err);
+//   });
+
 const app = express();
 
-app.get('/', (req, res) => {
-  res.send({ hi: 'there' });
-});
+require('./routes/authRoutes')(app);
 
 const PORT = process.env.PORT || 5000; // provided by Heroku, or 5000 in development
-
 app.listen(PORT);
