@@ -1,25 +1,23 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route } from 'react-router-dom'; // BrowswerRouter tells React Router how to behave. Route is used to set up rules
+
+import Header from './components/Header';
+const Dashbord = () => <h2>Dashbord</h2>;
+const SurveyNew = () => <h2>SurveyNew</h2>;
+const Landing = () => <h2>Landing</h2>;
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a href="/auth/google">Sign In</a>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <div>
+          <Header /> {/*always visible*/}
+          <Route exact={true} path="/" component={Landing} />
+          <Route exact={true} path="/surveys" component={Dashbord} />
+          <Route path="/surveys/new" component={SurveyNew} />
+        </div>
+      </BrowserRouter>
+      <a href="/auth/google">Sign In</a>
     </div>
   );
 }
