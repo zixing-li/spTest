@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import './index.css';
 import * as serviceWorker from './serviceWorker';
+import reduxThunk from 'redux-thunk'; // allows us to dispatch a function at any point in time; instead of flat out returning an action
 
 import App from './App';
 import reducers from './reducers';
 
-const store = createStore(reducers, {}, applyMiddleware());
+const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
 ReactDOM.render(
   <Provider store={store}>
